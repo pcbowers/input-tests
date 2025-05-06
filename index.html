@@ -27,5 +27,44 @@
         <li><a>Item 2</a></li>
       </ul>
     </div>
+
+    <div class="grid grid-cols-3 gap-2">
+      <div class="rounded-bx bg-base-100 p-2 shadow-sm">
+        <h2 class="text-xl">Keydown</h2>
+        <pre id="keydown-output"></pre>
+      </div>
+      <div class="rounded-bx bg-base-100 p-2 shadow-sm">
+        <h2 class="text-xl">Keypress</h2>
+        <pre id="keypress-output"></pre>
+      </div>
+      <div class="rounded-bx bg-base-100 p-2 shadow-sm">
+        <h2 class="text-xl">Keyup</h2>
+        <pre id="keyup-output"></pre>
+      </div>
+    </div>
   </body>
+
+  <script>
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        document.getElementById('keydown-output').innerText += '\n';
+      } else {
+        document.getElementById('keydown-output').innerText += e.key;
+      }
+    });
+    document.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        document.getElementById('keypress-output').innerText += '\n';
+      } else {
+        document.getElementById('keypress-output').innerText += e.key;
+      }
+    });
+    document.addEventListener('keyup', e => {
+      if (e.key === 'Enter') {
+        document.getElementById('keyup-output').innerText += '\n';
+      } else {
+        document.getElementById('keyup-output').innerText += e.key;
+      }
+    });
+  </script>
 </html>
