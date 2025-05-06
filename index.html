@@ -8,28 +8,67 @@
     <title>Input Tests</title>
     <style type="text/tailwindcss"></style>
   </head>
-  <body class="prose p-2 m-auto">
+  <body class="prose p-2 m-auto flex flex-col gap-2">
     <h1 class="text-3xl font-bold">Input Tests</h1>
 
-    <input type="text" id="hiddenInput" style="opacity: 0; position: absolute; left: -9999px" />
-    <button class="btn" onclick="document.getElementById('hiddenInput').focus()">Focus</button>
+    <div class="flex gap-2 items-center">
+      <input
+        type="text"
+        id="hiddenInput"
+        style="opacity: 0; position: absolute; left: -9999px"
+        oninput="document.getElementById('hiddenInput-output').innerText = this.value"
+      />
+      <button class="btn" onclick="document.getElementById('hiddenInput').focus()">Focus Hidden Input</button>
+      (Hidden Input Value:
+      <pre id="hiddenInput-output">Empty</pre>
+      )
+    </div>
 
-    <input type="text" class="input" autofocus />
+    <div class="flex gap-2 items-center">
+      <input
+        type="text"
+        id="hiddenReadonlyInput"
+        style="opacity: 0; position: absolute; left: -9999px"
+        readonly
+        oninput="document.getElementById('hiddenReadonlyInput-output').innerText = this.value"
+      />
+      <button class="btn" onclick="document.getElementById('hiddenReadonlyInput').focus()">
+        Focus Hidden Readonly Input
+      </button>
+      (Hidden Input Value:
+      <pre id="hiddenReadonlyInput-output">Empty</pre>
+      )
+    </div>
 
-    <select class="select">
-      <option disabled selected>Pick a color</option>
-      <option>Crimson</option>
-      <option>Amber</option>
-      <option>Velvet</option>
-    </select>
+    <div class="flex gap-2 items-center">
+      <input
+        type="text"
+        id="hiddenInputModeInput"
+        style="opacity: 0; position: absolute; left: -9999px"
+        inputmode="none"
+        oninput="document.getElementById('hiddenInputModeInput-output').innerText = this.value"
+      />
+      <button class="btn" onclick="document.getElementById('hiddenInputModeInput').focus()">
+        Focus Hidden inputmode="none" Input
+      </button>
+      (Hidden Input Value:
+      <pre id="hiddenInputModeInput-output">Empty</pre>
+      )
+    </div>
 
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn m-1">Click</div>
+    <div class="flex gap-2 items-center">
+      <input type="text" class="input" placeholder="Autofocus Visible Input" autofocus />
+    </div>
+
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn m-1">Dropdown That Uses Focus</div>
       <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-        <li><a>Item 1</a></li>
-        <li><a>Item 2</a></li>
+        <li><a href="#item-1" onclick="document.activeElement.blur()">Item 1</a></li>
+        <li><a href="#item-2">Item 2</a></li>
       </ul>
     </div>
+
+    <hr />
 
     <div class="grid grid-cols-3 gap-2">
       <div class="rounded-bx bg-base-100 p-2 shadow-sm">
