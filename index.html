@@ -12,6 +12,13 @@
     <h1 class="text-3xl font-bold">Input Tests</h1>
 
     <div class="flex gap-2 items-center">
+      <h2>
+        Current Focus:
+        <pre id="currentFocus"></pre>
+      </h2>
+    </div>
+
+    <div class="flex gap-2 items-center">
       <input
         type="text"
         id="hiddenInput"
@@ -55,9 +62,25 @@
       <pre id="hiddenInputModeInput-output">Empty</pre>
       )
     </div>
+    <div class="flex gap-2 items-center">
+      <input
+        type="text"
+        id="hiddenInputModeAutofocusInput"
+        style="opacity: 0; position: absolute; left: -9999px"
+        inputmode="none"
+        autofocus
+        oninput="document.getElementById('hiddenInputModeAutofocusInput-output').innerText = this.value"
+      />
+      <button class="btn" onclick="document.getElementById('hiddenInputModeAutofocusInput').focus()">
+        Focus Hidden inputmode="none" with Autofocus Input
+      </button>
+      (Hidden Input Value:
+      <pre id="hiddenInputModeAutofocusInput-output">Empty</pre>
+      )
+    </div>
 
     <div class="flex gap-2 items-center">
-      <input type="text" class="input" placeholder="Autofocus Visible Input" autofocus />
+      <input type="text" class="input" placeholder="Visible Input" />
     </div>
 
     <div class="dropdown">
@@ -107,6 +130,19 @@
       } else {
         document.getElementById('keyup-output').innerText += e.key;
       }
+    });
+
+    document.addEventListener('focusin', event => {
+      const focused = event.target;
+      const output = document.getElementById('currentFocus');
+
+      // Optional: show tag, ID, and class name
+      let info = `<${focused.tagName.toLowerCase()}`;
+      if (focused.id) info += ` id="${focused.id}"`;
+      if (focused.className) info += ` class="${focused.className}"`;
+      info += '>';
+
+      output.textContent = info;
     });
   </script>
 </html>
